@@ -1,0 +1,379 @@
+:root {
+    --gold-primary: #c59b27;
+    --gold-light: #e6c875;
+    --gold-dark: #9a7411;
+    --gold-gradient: linear-gradient(135deg, #b8860b 0%, #d4af37 50%, #f3e5ab 75%, #aa7c11 100%);
+    --bg-pearl: #fcfbf9;
+    --text-dark: #1c1917;
+    --glass-bg: rgba(255, 255, 255, 0.78);
+    --glass-border: rgba(212, 175, 55, 0.32);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-pearl);
+    /* Subtle architectural gold dot grid */
+    background-image: radial-gradient(rgba(212, 175, 55, 0.22) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: var(--text-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Interactive Background Canvas & Ambient Orbs */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.ambient-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.45;
+}
+
+.orb-1 {
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, #f3e5ab, transparent 70%);
+    top: -100px;
+    right: -100px;
+}
+
+.orb-2 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, #edd69a, transparent 70%);
+    bottom: -100px;
+    left: -100px;
+}
+
+/* Custom Cursor Glow */
+#cursor-glow {
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    transition: width 0.2s, height 0.2s;
+}
+
+/* Typography & Editorial Gold Accents */
+.gold-serif-italic {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text; /* Added standard property */
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Added standard fallback */
+    padding-right: 4px;
+}
+
+.text-gold {
+    color: var(--gold-primary) !important;
+}
+
+.section-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+    color: var(--gold-primary);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Glassmorphic Navbar */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 14px 0;
+}
+
+.brand-monogram {
+    background: var(--gold-gradient);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(197, 155, 39, 0.3);
+}
+
+.brand-text {
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    color: #555 !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--gold-primary) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gold-gradient);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 70%;
+}
+
+/* Sections & Hero */
+section {
+    padding: 110px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.status-pill {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--glass-border);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #444;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--gold-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(197, 155, 39, 0.7);
+    animation: pulseGold 2s infinite;
+}
+
+@keyframes pulseGold {
+    0% { box-shadow: 0 0 0 0 rgba(197, 155, 39, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(197, 155, 39, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(197, 155, 39, 0); }
+}
+
+.cursor-blink {
+    color: var(--gold-primary);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* Buttons */
+.btn-gold-metallic {
+    background: var(--gold-gradient);
+    background-size: 200% auto;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(197, 155, 39, 0.28);
+    transition: all 0.4s ease;
+}
+
+.btn-gold-metallic:hover {
+    background-position: right center;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(197, 155, 39, 0.4);
+}
+
+.btn-outline-gold {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1.5px solid var(--gold-primary);
+    color: var(--gold-dark);
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+    background: var(--gold-primary);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Glass Cards & 3D Tilt */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.glass-card:hover {
+    border-color: var(--gold-primary);
+    box-shadow: 0 16px 40px rgba(212, 175, 55, 0.16);
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 14px;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--gold-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+}
+
+/* Tech Stack Filter & Cards */
+.filter-btn {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--glass-border);
+    color: #555;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--gold-gradient);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 5px 15px rgba(197, 155, 39, 0.25);
+}
+
+.skill-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-primary);
+    box-shadow: 0 10px 24px rgba(212, 175, 55, 0.18);
+}
+
+.skill-icon {
+    font-size: 1.8rem;
+    color: var(--gold-primary);
+}
+
+/* Project Cards */
+.project-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: rgba(197, 155, 39, 0.35);
+}
+
+.badge-gold {
+    background: rgba(212, 175, 55, 0.14);
+    color: var(--gold-dark);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.border-gold-subtle {
+    border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+.tech-mini-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #555;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 3px 10px;
+    border-radius: 6px;
+}
+
+/* Contact Inputs */
+.custom-input {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 10px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+    background: #fff;
+    border-color: var(--gold-primary);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+}
+
+/* Scroll Reveal Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
